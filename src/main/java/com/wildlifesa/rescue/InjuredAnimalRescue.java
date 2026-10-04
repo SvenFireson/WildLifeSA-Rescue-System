@@ -39,6 +39,10 @@ public String determineRescuePriority(){
         return "Low";
     } 
 }
+@Override
+    public String getRescueType(){
+        return "INjured Animal Rescue";
+    }
 
 @Override
 public void displayRescueDetails(){

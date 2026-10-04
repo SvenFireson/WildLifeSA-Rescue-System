@@ -52,6 +52,11 @@ public class EndangeredSpeciesRescue extends RescueCase {
             return "LOW";
         }
     }
+    @Override
+    public String getRescueType(){
+        return "Endangered Species Rescue";
+    }
+    
     
     @Override
     public void displayRescueDetails(){

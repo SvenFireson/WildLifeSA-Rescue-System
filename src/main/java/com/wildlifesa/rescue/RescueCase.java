@@ -1,14 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.wildlifesa.rescue;
 
-/**
- *
- * @author svenf
- */
-public abstract class RescueCase {
+
+public abstract class RescueCase implements RescueOperations {
     
     
     private String rescueCaseId;
@@ -37,8 +31,8 @@ public abstract class RescueCase {
         return rescueCaseId;
     }
 
-    public void setResceueCaseId(String resceueCaseId) {
-        this.rescueCaseId = resceueCaseId;
+    public void setRescueCaseId(String rescueCaseId) {
+        this.rescueCaseId = rescueCaseId;
     }
 
     public String getAnimalName() {
@@ -100,6 +94,32 @@ public abstract class RescueCase {
     public abstract double calculateTotalRescueCost();
     public abstract String determineRescuePriority();
     public abstract void displayRescueDetails();
+    public abstract String getRescueType();
     
+    @Override 
+    public void startRescueOperation(){
+        setCurrentRescueStatus("In Progress");
+    }
+    
+    @Override
+    public void completeRescueOperation(){
+        setCurrentRescueStatus("Completed");
+    }
+    
+    @Override
+    public String generateRescueSummary(){
+    
+        return "Rescue Case ID: "+ getRescueCaseId()
+                + "\nRescue Type: "+ getRescueType() 
+                + "\nSpecies: "+ getSpecies()
+                + "\nAssigned Ranger: "+ getAssignedRanger()
+                + "\nRescue Priority: "+ determineRescuePriority()
+                + "\nCurrent Status: "+ getCurrentRescueStatus()
+                + "\nTotal Rescue Cost: R"+ calculateTotalRescueCost();
+        
+    }
+    
+    
+
 }
 

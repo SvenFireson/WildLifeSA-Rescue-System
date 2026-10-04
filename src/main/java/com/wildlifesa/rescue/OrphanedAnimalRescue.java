@@ -50,6 +50,10 @@ public class OrphanedAnimalRescue extends RescueCase {
         } else {
             return "LOW";}
     }
+    @Override 
+    public String getRescueType(){
+        return "Orphaned Animal Rescue";
+    }
     
     @Override
     public void displayRescueDetails(){
