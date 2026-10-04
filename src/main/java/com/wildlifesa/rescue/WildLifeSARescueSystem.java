@@ -147,8 +147,22 @@ public class WildLifeSARescueSystem {
         String injuryDescription = scanner.nextLine();
     
         System.out.print("Enter Veterinary Treatment Cost: R");
+        
+        if(!scanner.hasNextDouble()){
+            System.out.println("Invalid input. Veterinary treatment cost must be a number.");
+            scanner.nextLine();
+        return;
+        }
+        
         double veterinaryTreatmentCost = scanner.nextDouble();
-    
+        
+        if(veterinaryTreatmentCost <=0){
+            System.out.println("Veterinary treatment cost must be greater than 0.");
+            scanner.nextLine();
+            return;
+            
+        }
+        
         System.out.println("Is Surgery Required? (true/false): ");
         boolean surgeryRequired = scanner.nextBoolean();
         scanner.nextLine();
@@ -176,10 +190,35 @@ public class WildLifeSARescueSystem {
     
         case 2: 
             System.out.println("Enter Estimated Age (Months): ");
+            
+            if(!scanner.hasNextInt()){
+                System.out.println("Invalid input. Estimated age must be a number.");
+                scanner.nextLine();
+            return;}
+            
             int estimatedAgeMonths = scanner.nextInt();
             
+            if(estimatedAgeMonths <=0){
+                System.out.println("Estimated age must be greater than 0.");
+                scanner.nextLine();
+            return;
+            }
+            
             System.out.println("Enter Feeding Cost: R");
+            
+            if(!scanner.hasNextDouble()){
+                System.out.println("Invalid input. Feeding cost must be a number.");
+                scanner.nextLine();
+            return;
+            }
+            
             double feedingCost = scanner.nextDouble();
+            
+            if(feedingCost <=0){
+                System.out.println("Feeding cost must be greater than 0.");
+                scanner.nextLine();
+            return;
+            }
             
             System.out.println("Is Foster Care Required? (true/false): ");
             boolean fosterCareRequired = scanner.nextBoolean();
@@ -210,7 +249,20 @@ public class WildLifeSARescueSystem {
             String conservationClassification = scanner.nextLine();
             
             System.out.println("Enter Security Cost: R");
+            
+            
+            if(!scanner.hasNextDouble()){
+                System.out.println("Invalid input. Security cost must be a number.");
+                scanner.nextLine();
+            return;
+            }
             double securityCost = scanner.nextDouble();
+            
+            if(securityCost <=0){
+                System.out.println("Security cost must be greater than 0");
+                scanner.nextLine();
+            return;
+            }
             
             System.out.println("Is a Specialist Team Required ? (true/false):");
             boolean specialistTeamRequired = scanner.nextBoolean();
@@ -272,14 +324,43 @@ public class WildLifeSARescueSystem {
             System.out.println("Rescue case not Found.");
             return;
     }
-        System.out.println("Current Status: "+ rescueCase.getCurrentRescueStatus());
-        System.out.println("Enter New Status: ");
-        String newStatus = scanner.nextLine();
-        
-        if(system.updateRescueStatus(rescueCaseId, newStatus)){
-            System.out.println("Rescue status updated successfully.");
-        }else{
-            System.out.println("Unable to update rescue status.");}
+        System.out.println("Current Status: " + rescueCase.getCurrentRescueStatus());
+
+        System.out.println("\nSelect Operation:");
+        System.out.println("1. Start Rescue Operation");
+        System.out.println("2. Complete Rescue Operation");
+        System.out.println("3. Enter Custom Status");
+
+        int statusChoice = scanner.nextInt();
+            scanner.nextLine();
+
+        switch (statusChoice) {
+
+               case 1:
+                rescueCase.startRescueOperation();
+                System.out.println("Rescue operation started successfully.");
+                break;
+
+                case 2:
+                rescueCase.completeRescueOperation();
+                System.out.println("Rescue operation completed successfully.");
+                break;
+
+                case 3:
+                System.out.println("Enter New Status: ");
+                String newStatus = scanner.nextLine();
+
+                if (system.updateRescueStatus(rescueCaseId, newStatus)) {
+                System.out.println("Rescue status updated successfully.");
+                } else {
+                System.out.println("Unable to update rescue status.");
+                }
+        break;
+
+                default:
+                System.out.println("Invalid selection.");
+        break;
+}
     }
     
     
